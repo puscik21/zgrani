@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Ustawienia Mavena lokalne dla tego projektu.
+
+  Powód istnienia: globalny ~/.m2/settings.xml kieruje `central` na wewnętrznego
+  Nexusa firmowego. Tamten adres jest nieosiągalny spoza sieci firmowej, a więc
+  także z GitHub Actions i z Rendera. Ten plik zawęża zależności do publicznego
+  Maven Central, dzięki czemu projekt buduje się tak samo lokalnie, w CI i przy
+  wdrożeniu — i nie kieruje ruchu prywatnego projektu przez infrastrukturę pracodawcy.
+
+  Wpinany automatycznie przez .mvn/maven.config, więc `./mvnw` nie wymaga flag.
+-->
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                              https://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <mirrors>
+    <mirror>
+      <id>maven-central-public</id>
+      <mirrorOf>central</mirrorOf>
+      <name>Maven Central</name>
+      <url>https://repo1.maven.org/maven2</url>
+    </mirror>
+  </mirrors>
+</settings>
