@@ -1,3 +1,6 @@
 spring:
   application:
     name: "zgrani"
+  mvc:
+    problemdetails:
+      enabled: true
