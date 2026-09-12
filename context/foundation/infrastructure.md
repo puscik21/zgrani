@@ -5,7 +5,7 @@ recommended_platform: Render
 runner_up: Fly.io
 context_type: mvp
 tech_stack:
-  language: Java 21
+  language: Java 25
   framework: Spring Boot 4.1
   runtime: executable JAR (Maven), Docker deploy (no native Java runtime on Render)
 ---
@@ -114,7 +114,7 @@ Three candidates were cross-checked in sequence as the leading pick changed duri
 
 ## Getting Started
 
-1. Write a multi-stage `Dockerfile`: build stage on a Maven+JDK 21 image (`mvn clean package -DskipTests` or with tests), runtime stage on a slim JRE 21 base (e.g. `eclipse-temurin:21-jre-alpine`) copying only the built JAR — this keeps the image small and build time reasonable on Render's Docker build path.
+1. Write a multi-stage `Dockerfile`: build stage on a Maven+JDK 25 image (`mvn clean package -DskipTests` or with tests), runtime stage on a slim JRE 25 base (e.g. `eclipse-temurin:25-jre-alpine`) copying only the built JAR — this keeps the image small and build time reasonable on Render's Docker build path.
 2. Create the Render service with the **Docker** runtime (not a native-language runtime — Render has none for Java) and an explicit **EU region** — this cannot be changed later without recreating the service.
 3. Start on the **Free** plan for solo development/testing. Set a hard, calendar-independent trigger to switch to **Starter ($7/mo)**: before the event link is ever sent to a real participant outside the developer — not "when the app feels done."
 4. Configure `server.port=${PORT:8080}` (or Render's equivalent env var) so the container binds correctly — verify against Render's actual port-injection convention before first deploy, since conventions vary by platform.
