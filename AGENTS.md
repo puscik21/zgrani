@@ -1,6 +1,6 @@
 # Repository Guidelines
 
-Zgrani is a Spring Boot 4.1 / Java 21 backend, built with the Maven wrapper. It will eventually serve a React + TypeScript frontend as its own static resources — see `@context/foundation/tech-stack.md` for the full stack contract.
+Zgrani is a Spring Boot 4.1 / Java 25 backend, built with the Maven wrapper. It will eventually serve a React + TypeScript frontend as its own static resources — see `@context/foundation/tech-stack.md` for the full stack contract.
 
 ## Hard rules
 
