@@ -2,6 +2,8 @@
 
 Zatwierdzone przez Plan Mode, 2026-09-12. Wsad: `@context/foundation/infrastructure.md` + `@context/foundation/tech-stack.md`. Cel: udowodnić pipeline kod → Docker → Render → publiczny URL, zamykając Moduł 1 end-to-end — nie wdrożenie MVP-a (frontend jeszcze nie istnieje w repo).
 
+**Status: ✅ wdrożone.** Publiczny URL: https://zgrani-jtzv.onrender.com — `srv-daiqh895efls73eijt30`, region `frankfurt`, plan `free`.
+
 ## Kroki automatyczne (zrobione przez agenta)
 
 - [x] `pom.xml`: `java.version` 21 → 25, dodano `spring-boot-starter-actuator` (`cfacf44`)
@@ -13,19 +15,19 @@ Zatwierdzone przez Plan Mode, 2026-09-12. Wsad: `@context/foundation/infrastruct
 
 ## Kroki manualne (Ty, w tej dokładnej kolejności)
 
-1. Załóż/potwierdź konto Render (logowanie przez GitHub upraszcza krok 2).
-2. Render Dashboard → **New +** → **Web Service** → połącz GitHub, nadaj dostęp tylko do repo `zgrani` (nie do wszystkich repozytoriów).
-3. Formularz tworzenia serwisu:
+1. [x] Załóż/potwierdź konto Render (logowanie przez GitHub upraszcza krok 2).
+2. [x] Render Dashboard → **New +** → **Web Service** → połącz GitHub, nadaj dostęp tylko do repo `zgrani` (nie do wszystkich repozytoriów).
+3. [x] Formularz tworzenia serwisu:
    - Runtime: **Docker**
-   - Region: jawnie **EU** (np. Frankfurt) — nie da się zmienić później bez odtworzenia serwisu
+   - Region: jawnie **EU** (Frankfurt) — nie da się zmienić później bez odtworzenia serwisu
    - Branch: `main`
    - Dockerfile path: `./Dockerfile`
    - Plan: **Free** na start
-   - Auto-Deploy: **On**
-4. Po pierwszym udanym deployu: Settings → Health Checks → ścieżka `/actuator/health`.
-5. **Nadal na Free, bez płacenia:** zmierz i zapisz realny cold-start (`curl` na `/actuator/health` po >15 min ciszy; oczekiwane ~60-90s) — potwierdzenie liczby z researchu faktycznym pomiarem.
-6. **Przed wysłaniem linku do prawdziwych uczestników** (nie wcześniej, nie "jak MVP będzie gotowe"): Settings → Plan → przełącz Free → Starter ($7/mo).
-7. Opcjonalnie później: podłącz Render MCP server (`render-oss/render-mcp-server`) do agentowej diagnostyki logów/statusu.
+   - Auto-Deploy: **On** — potwierdzone działające: push do `main` (`ff0a0f4`) wywołał automatyczny redeploy bez ręcznej interwencji
+4. [x] Po pierwszym udanym deployu: Settings → Health Checks → ścieżka `/actuator/health`.
+5. [ ] **Nadal na Free, bez płacenia:** zmierz i zapisz realny cold-start (`curl` na `/actuator/health` po >15 min ciszy; oczekiwane ~60-90s) — potwierdzenie liczby z researchu faktycznym pomiarem. *(odłożone przez użytkownika na wolną chwilę)*
+6. [ ] **Przed wysłaniem linku do prawdziwych uczestników** (nie wcześniej, nie "jak MVP będzie gotowe"): Settings → Plan → przełącz Free → Starter ($7/mo).
+7. [x] Dostęp agenta do żywego stanu: zainstalowane **Render CLI** (`brew install render`, `render login`, `render workspace set`) zamiast MCP servera — wystarcza na obecnym etapie (jeden serwis, sporadyczne zapytania o status/logi). MCP pozostaje opcją na później, gdyby pojawił się powtarzalny wzorzec strukturalnych zapytań o stan.
 
 ## Sekrety
 
@@ -37,10 +39,10 @@ Brak wymaganych na tym etapie (brak bazy, auth, zewnętrznych API).
 
 ## Checklist weryfikacji po realnym deployu na Render
 
-- [ ] `curl -i https://<serwis>.onrender.com/actuator/health` → `200 {"status":"UP"}`
-- [ ] Dashboard pokazuje "Live" z przechodzącym health checkiem, nie tylko "Deployed"
-- [ ] Nieistniejąca ścieżka zwraca `application/problem+json` (RFC 9457), nie Whitelabel error page
-- [ ] Serwis związany z injectowanym `$PORT` (health check przechodzi = dobry znak)
+- [x] `curl -i https://zgrani-jtzv.onrender.com/actuator/health` → `200 {"status":"UP"}` — potwierdzone 2026-09-12
+- [x] Dashboard pokazuje "Live" z przechodzącym health checkiem, nie tylko "Deployed" — `healthCheckPath: /actuator/health` ustawione i zielone
+- [x] Nieistniejąca ścieżka zwraca `application/problem+json` (RFC 9457), nie Whitelabel error page — potwierdzone: `{"detail":"No static resource ...","status":404,"title":"Not Found"}`
+- [x] Serwis związany z injectowanym `$PORT` (health check przechodzi = dobry znak)
 - [ ] Zmierzony realny cold-start na Free — zapisany tutaj po pomiarze: `___`
 
 ## Odłożone (świadomie, nie po cichu pominięte)
