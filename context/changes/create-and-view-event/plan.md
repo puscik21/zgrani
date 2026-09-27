@@ -265,15 +265,15 @@ Brak istniejących danych do migracji — pierwsza encja w projekcie, `ddl-auto:
 
 #### Automated
 
-- [x] 2.1 Testy jednostkowe przechodzą: `./mvnw test -Dtest=TermGenerationServiceTest`
+- [x] 2.1 Testy jednostkowe przechodzą: `./mvnw test -Dtest=TermGenerationServiceTest` — 22e5804
 
 ### Phase 3: REST API
 
 #### Automated
 
-- [ ] 3.1 Pełny build przechodzi: `./mvnw clean verify`
-- [ ] 3.2 Testy integracyjne przechodzą: `./mvnw test -Dtest=EventControllerTest`
-- [ ] 3.3 Testy jednostkowe wciąż przechodzą: `./mvnw test -Dtest=TermGenerationServiceTest`
+- [x] 3.1 Pełny build przechodzi: `./mvnw clean verify`
+- [x] 3.2 Testy integracyjne przechodzą: `./mvnw test -Dtest=EventControllerTest`
+- [x] 3.3 Testy jednostkowe wciąż przechodzą: `./mvnw test -Dtest=TermGenerationServiceTest`
 
 #### Manual
 
