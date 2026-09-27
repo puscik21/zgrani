@@ -1,7 +1,7 @@
 ---
 change_id: create-and-view-event
 title: Organizator zakłada wydarzenie i widzi je (gwiazda przewodnia)
-status: implementing
+status: impl_reviewed
 created: 2026-09-27
 updated: 2026-09-27
 archived_at: null

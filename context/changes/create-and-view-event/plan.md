@@ -271,9 +271,9 @@ Brak istniejących danych do migracji — pierwsza encja w projekcie, `ddl-auto:
 
 #### Automated
 
-- [x] 3.1 Pełny build przechodzi: `./mvnw clean verify`
-- [x] 3.2 Testy integracyjne przechodzą: `./mvnw test -Dtest=EventControllerTest`
-- [x] 3.3 Testy jednostkowe wciąż przechodzą: `./mvnw test -Dtest=TermGenerationServiceTest`
+- [x] 3.1 Pełny build przechodzi: `./mvnw clean verify` — 1882be9
+- [x] 3.2 Testy integracyjne przechodzą: `./mvnw test -Dtest=EventControllerTest` — 1882be9
+- [x] 3.3 Testy jednostkowe wciąż przechodzą: `./mvnw test -Dtest=TermGenerationServiceTest` — 1882be9
 
 #### Manual
 
