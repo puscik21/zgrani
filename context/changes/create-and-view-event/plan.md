@@ -277,6 +277,6 @@ Brak istniejących danych do migracji — pierwsza encja w projekcie, `ddl-auto:
 
 #### Manual
 
-- [ ] 3.4 `curl -X POST` zwraca `201` z pełną listą terminów
-- [ ] 3.5 `curl GET` po restarcie procesu zwraca identyczne dane
-- [ ] 3.6 Polskie znaki diakrytyczne wracają nieuszkodzone
+- [x] 3.4 `curl -X POST` zwraca `201` z pełną listą terminów
+- [x] 3.5 `curl GET` po restarcie procesu zwraca identyczne dane
+- [x] 3.6 Polskie znaki diakrytyczne wracają nieuszkodzone
