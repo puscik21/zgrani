@@ -75,3 +75,6 @@ node_modules/
 frontend/dist/
 .vite/
 npm-debug.log*
+
+### H2 plikowe (lokalna trwałość dev) ###
+/data/

@@ -254,12 +254,12 @@ Brak istniejących danych do migracji — pierwsza encja w projekcie, `ddl-auto:
 
 #### Automated
 
-- [ ] 1.1 Build przechodzi: `./mvnw clean compile`
-- [ ] 1.2 Kontekst Springa startuje bez błędów: `./mvnw test -Dtest=ZgraniApplicationTests`
+- [x] 1.1 Build przechodzi: `./mvnw clean compile`
+- [x] 1.2 Kontekst Springa startuje bez błędów: `./mvnw test -Dtest=ZgraniApplicationTests`
 
 #### Manual
 
-- [ ] 1.3 Po starcie aplikacji plik `./data/zgrani.mv.db` istnieje na dysku
+- [x] 1.3 Po starcie aplikacji plik `./data/zgrani.mv.db` istnieje na dysku
 
 ### Phase 2: Logika generowania terminów
 
