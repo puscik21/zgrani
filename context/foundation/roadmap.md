@@ -43,7 +43,7 @@ Grupa znajomych (4-10 osób) ustala termin spotkania przez wątek na komunikator
 
 | ID   | Change ID                       | Outcome (user can …)                                              | Prerequisites | PRD refs                          | Status   |
 | ---- | -------------------------------- | ------------------------------------------------------------------ | -------------- | ---------------------------------- | -------- |
-| S-01 | create-and-view-event             | (north star) Organizator tworzy wydarzenie i od razu je widzi      | —              | FR-001, FR-002, US-02 (część)      | ready    |
+| S-01 | create-and-view-event             | (north star) Organizator tworzy wydarzenie i od razu je widzi      | —              | FR-001, FR-002, US-02 (część)      | in-progress |
 | F-01 | outbound-email-capability         | (foundation) Aplikacja potrafi wysłać jednego maila                | —              | NFR (mail ≤5 min, PL znaki)        | ready    |
 | S-02 | deliver-and-copy-event-link       | Organizator dostaje link mailem i kopiuje go ze strony wydarzenia  | S-01, F-01     | FR-003, FR-004, US-02 (reszta)     | proposed |
 | S-03 | participant-submits-availability  | Uczestnik podaje i koryguje własną dostępność                     | S-01           | FR-006, 007, 008, 009, 011, 012, US-01 | proposed |
@@ -101,7 +101,7 @@ Stan na `2026-09-27` (auto-zbadany + potwierdzony przez użytkownika). Foundatio
 - **Blockers:** —
 - **Unknowns:** —
 - **Risk:** Celowo zawężone (decyzja użytkownika) do samego utworzenia i wyświetlenia — bez maila i przycisku kopiowania linku — żeby dostać najszybszy możliwy dowód, że zapis danych i wire-up działają, zanim dojdzie druga strona (uczestnik).
-- **Status:** ready
+- **Status:** in-progress
 
 ### S-02: Organizator otrzymuje i kopiuje link do wydarzenia
 

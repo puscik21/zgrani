@@ -1,0 +1,117 @@
+### Create event (happy path) — saves the event id into the {{eventId}} variable
+# @name createEvent
+POST {{baseUrl}}/api/events
+Content-Type: application/json
+
+{
+  "name": "Integracja zespołu",
+  "description": "Wyjście integracyjne — polskie znaki: ąćęłńóśźż",
+  "dateRangeStart": "2026-10-05",
+  "dateRangeEnd": "2026-10-11",
+  "daysOfWeek": ["WEDNESDAY", "FRIDAY"],
+  "expectedParticipants": 8,
+  "organizerEmail": "organizer@example.com"
+}
+
+> {%
+    client.test("201 Created", function () {
+        client.assert(response.status === 201, "Expected 201, got " + response.status);
+    });
+    client.global.set("eventId", response.body.id);
+%}
+
+### Fetch the previously created event by id
+GET {{baseUrl}}/api/events/{{eventId}}
+Accept: application/json
+
+> {%
+    client.test("200 OK", function () {
+        client.assert(response.status === 200, "Expected 200, got " + response.status);
+    });
+%}
+
+### Fetch a nonexistent event → 404 ProblemDetail
+GET {{baseUrl}}/api/events/00000000-0000-0000-0000-000000000000
+Accept: application/json
+
+> {%
+    client.test("404 Not Found (ProblemDetail)", function () {
+        client.assert(response.status === 404, "Expected 404, got " + response.status);
+    });
+%}
+
+### Validation: missing required fields (name, organizerEmail) → 400 ProblemDetail
+POST {{baseUrl}}/api/events
+Content-Type: application/json
+
+{
+  "description": "Missing name and organizerEmail",
+  "dateRangeStart": "2026-10-05",
+  "dateRangeEnd": "2026-10-11",
+  "daysOfWeek": ["MONDAY"],
+  "expectedParticipants": 5
+}
+
+> {%
+    client.test("400 Bad Request (ProblemDetail)", function () {
+        client.assert(response.status === 400, "Expected 400, got " + response.status);
+    });
+%}
+
+### Invalid date range (dateRangeEnd before dateRangeStart) → 400 ProblemDetail
+POST {{baseUrl}}/api/events
+Content-Type: application/json
+
+{
+  "name": "Invalid date range",
+  "dateRangeStart": "2026-10-11",
+  "dateRangeEnd": "2026-10-05",
+  "daysOfWeek": ["MONDAY"],
+  "expectedParticipants": 5,
+  "organizerEmail": "organizer@example.com"
+}
+
+> {%
+    client.test("400 Bad Request (ProblemDetail)", function () {
+        client.assert(response.status === 400, "Expected 400, got " + response.status);
+    });
+%}
+
+### 30-term limit exceeded (31 Mondays) → 422 ProblemDetail
+POST {{baseUrl}}/api/events
+Content-Type: application/json
+
+{
+  "name": "Too many terms",
+  "dateRangeStart": "2026-01-05",
+  "dateRangeEnd": "2026-08-03",
+  "daysOfWeek": ["MONDAY"],
+  "expectedParticipants": 5,
+  "organizerEmail": "organizer@example.com"
+}
+
+> {%
+    client.test("422 Unprocessable Entity (ProblemDetail)", function () {
+        client.assert(response.status === 422, "Expected 422, got " + response.status);
+    });
+%}
+
+### Exactly 30 terms (accepted) — 30 Mondays starting 2026-01-05
+POST {{baseUrl}}/api/events
+Content-Type: application/json
+
+{
+  "name": "Exactly 30 terms",
+  "dateRangeStart": "2026-01-05",
+  "dateRangeEnd": "2026-07-27",
+  "daysOfWeek": ["MONDAY"],
+  "expectedParticipants": 5,
+  "organizerEmail": "organizer@example.com"
+}
+
+> {%
+    client.test("201 Created, exactly 30 terms", function () {
+        client.assert(response.status === 201, "Expected 201, got " + response.status);
+        client.assert(response.body.candidateTerms.length === 30, "Expected 30 terms, got " + response.body.candidateTerms.length);
+    });
+%}
